@@ -3,3 +3,6 @@
 ################################################################################
 
 /App_Data/SampleDb.mdf
+/App_Data/SampleDb_log.ldf
+/.vs/SampleApp/v15/Server/sqlite3
+/.vs
