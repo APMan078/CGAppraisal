@@ -16,30 +16,14 @@
                 </span>
             </div>
             <br />
-            <div class="form-group">
-                <span class=" col-md-2">
-                    Date From:
-                     <asp:TextBox ID="txtfrom" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
-                    <asp:LinkButton ID="lbfrom" runat="server" OnClick="lbfrom_Click" >PickDate...</asp:LinkButton>
-                   <asp:Calendar ID="clndrfrom" runat="server" Visible="False" OnSelectionChanged="clndrfrom_SelectionChanged"  ></asp:Calendar>
-                </span>
-
-                
-
-                 <span class="col-md-2">
-                    Date To:
-                    <asp:TextBox ID="txtto" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
-                    <asp:LinkButton ID="lbTo" runat="server"  onClick="lbTo_Click" >PickDate...</asp:LinkButton>
-                   <asp:Calendar ID="clndrto" runat="server" Visible="False" OnSelectionChanged="clndrto_SelectionChanged" ></asp:Calendar>
-                </span> 
-
+            <div class="form-group">                
                 <span class="col-md-4">
                    Keyword:
                     <asp:TextBox ID="txtKeyword" runat="server" CssClass="form-control"></asp:TextBox> 
                 </span> 
                  <div class="col-md-2">
                      <br />
-                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success"/>
+                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btnsearch_Click"/>
                  </div>
             </div>
         </div>
@@ -82,9 +66,9 @@
             <ItemTemplate>
                 <td>
                      <asp:Button ID="btndel" runat="server" Text="Delete" tooltip="Delete a record" 
-                         onclientclick="javascript:return confirm('Are you sure to delete record?')" CommandName="EmpDelete" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "EmpID") %>' />  
+                         onclientclick="javascript:return confirm('Are you sure to delete record?')" CommandName="EmpDelete" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' />  
                      <asp:Button ID="btnupdt" runat="server" Text="Edit" tooltip="Update a record" 
-                         CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "EmpID") %>' /> 
+                         CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' /> 
                 </td> 
                 <td>
                     <%# Eval("RowNo").ToString() %>
