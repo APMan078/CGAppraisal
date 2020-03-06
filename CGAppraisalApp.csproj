@@ -183,6 +183,9 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\DataProcess.cs" />
+    <Compile Include="Controller\PubFunc.cs" />
+    <Compile Include="Controller\SQLProcess.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
