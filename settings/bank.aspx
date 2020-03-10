@@ -29,14 +29,16 @@
         </div>
 
         <asp:ListView ID="lvItems" runat="server" GroupPlaceholderID="groupPlaceHolder1"
-            ItemPlaceholderID="itemPlaceHolder1"  >
+            ItemPlaceholderID="itemPlaceHolder1"   >
             <LayoutTemplate>
-            <table  class="table">
-                <thead class="thead-dark">
+            <div class="table-responsive-sm">
+            <table class="table">
+                <caption>List of Bank</caption>
+                <thead class="table-primary">
                     <tr>
-                        <th scope="col">
+                        <th class="col-1" scope="col">
 
-                        </th> 
+                        </th>  
                         <th scope="col">#</th>
                         <th scope="col">DATE ENCODED</th> 
                         <th scope="col">NAME</th>
@@ -57,6 +59,7 @@
                         </td>
                     </tr>
                 </table>
+            </div>
             </LayoutTemplate>
             <GroupTemplate>
                 <tr>
@@ -64,21 +67,24 @@
                 </tr>
             </GroupTemplate>
             <ItemTemplate>
-                <td>
-                     <asp:Button ID="btndel" runat="server" Text="Delete" tooltip="Delete a record" 
-                         onclientclick="javascript:return confirm('Are you sure to delete record?')" CommandName="EmpDelete" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' />  
-                     <asp:Button ID="btnupdt" runat="server" Text="Edit" tooltip="Update a record" 
-                         CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' /> 
-                </td> 
-                <td>
-                    <%# Eval("RowNo").ToString() %>
-                </td> 
-                <td>
-                    <%# Convert.ToDateTime(Eval("DateEncoded")).ToString("MM/dd/yyyy hh:mm tt") %>
-                </td>
-                <td>
-                    <%# Eval("Name").ToString() %>
-                </td> 
+                <tr>
+                    <th class="row"> 
+                        
+                         <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Update a record" 
+                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' OnClick="btnEdit_Click" >
+                        <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                         </asp:LinkButton>
+                    </th>  
+                    <th scope="row">
+                        <%# Eval("RowNo").ToString() %>
+                    </th> 
+                    <td>
+                        <%# Convert.ToDateTime(Eval("DateEncoded")).ToString("MM/dd/yyyy hh:mm tt") %>
+                    </td>
+                    <td>
+                        <%# Eval("Name").ToString() %>
+                    </td> 
+                </tr>
             </ItemTemplate>
         </asp:ListView>
          
