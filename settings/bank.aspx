@@ -68,8 +68,7 @@
             </GroupTemplate>
             <ItemTemplate>
                 <tr>
-                    <th class="row"> 
-                        
+                    <th class="row">  
                          <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Update a record" 
                              CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' OnClick="btnEdit_Click" >
                         <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>

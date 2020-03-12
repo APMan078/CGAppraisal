@@ -55,7 +55,7 @@ namespace SampleApp.Controller
             string isActive = input[2];
 
 
-            using (SQLProcess.SqlCommandEx _sql = new SQLProcess.SqlCommandEx(@"BankLoad"))
+            using (SQLProcess.SqlCommandEx _sql = new SQLProcess.SqlCommandEx(@"BankSaveUpdate"))
             {
                 _sql.CommandObject.CommandType = CommandType.StoredProcedure;
 

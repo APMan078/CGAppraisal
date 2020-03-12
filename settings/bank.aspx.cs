@@ -39,7 +39,7 @@ namespace SampleApp.settings
             LinkButton item = (LinkButton)sender;
             if(item.CommandArgument != null)
             {
-                Response.Redirect("~/settings/bankDetails/id="+item.CommandArgument);
+                Response.Redirect("~/settings/bankDetails?id="+item.CommandArgument);
             }
             else
             {
