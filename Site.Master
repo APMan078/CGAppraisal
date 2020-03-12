@@ -55,7 +55,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a runat="server" href="~/settings/bank">Bank</a></li>
-                                <li><a href="#">Branch</a></li>
+                                <li><a runat="server" href="~/settings/branch">Branch</a></li>
                                 <li><a href="#">Payment Details</a></li>
                                 <li><a><hr></a></li>
                                 <li><a runat="server" href="~/settings/bank">Access</a></li>

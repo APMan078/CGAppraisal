@@ -83,7 +83,7 @@ namespace SampleApp.Controller
             string dateFrom = input[1];
             string dateTo = input[2];
 
-            using (SQLProcess.SqlCommandEx _sql = new SQLProcess.SqlCommandEx(@"BankLoad"))
+            using (SQLProcess.SqlCommandEx _sql = new SQLProcess.SqlCommandEx(@"BankBranchLoad"))
             {
                 _sql.CommandObject.CommandType = CommandType.StoredProcedure;
 
@@ -98,7 +98,38 @@ namespace SampleApp.Controller
                 return _dt;
             }
         }
+        public static string SaveUpdateBankDetails(bool isEdit, string inputs)
+        {
+            string[] input = inputs.Split('▲');
+            string id = input[0];
+            string name = input[1];
+            string isActive = input[2];
+            string bankId = input[3];
+            string accountNo = input[4];
 
+
+            using (SQLProcess.SqlCommandEx _sql = new SQLProcess.SqlCommandEx(@"BankBranchSaveUpdate"))
+            {
+                _sql.CommandObject.CommandType = CommandType.StoredProcedure;
+
+                _sql.CommandObject.Parameters.AddWithValue("@isEdit", isEdit);
+                _sql.CommandObject.Parameters.AddWithValue("@id", id);
+                _sql.CommandObject.Parameters.AddWithValue("@name", name);
+                _sql.CommandObject.Parameters.AddWithValue("@isActive", isActive);
+                _sql.CommandObject.Parameters.AddWithValue("@bankId", bankId);
+                _sql.CommandObject.Parameters.AddWithValue("@accountNo", accountNo);
+                _sql.CommandObject.ExecuteNonQuery();
+
+                if (isEdit)
+                {
+                    return "Updated Successfully";
+                }
+                else
+                {
+                    return "Saved Successfully";
+                }
+            }
+        }
 
     }
 }

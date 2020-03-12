@@ -10,7 +10,7 @@
             <h4><asp:Label ID="Label1" runat="server" Text="Name:" CssClass="control-label col-md-2"></asp:Label></h4> 
              <div class="col-md-10">
                  <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
-                 <asp:RequiredFieldValidator ID="validateUsername" runat="server" CssClass="text-danger" ErrorMessage="Please input username" ControlToValidate="txtName"></asp:RequiredFieldValidator>
+                 <asp:RequiredFieldValidator ID="validateUsername" runat="server" CssClass="text-danger" ErrorMessage="Please input name" ControlToValidate="txtName"></asp:RequiredFieldValidator>
              </div>
         </div>
         <div class="form-group">
