@@ -29,7 +29,7 @@
         </div>
 
         <asp:ListView ID="lvItems" runat="server" GroupPlaceholderID="groupPlaceHolder1"
-            ItemPlaceholderID="itemPlaceHolder1"   >
+            ItemPlaceholderID="itemPlaceHolder1" OnPagePropertiesChanging="lvItems_PagePropertiesChanging">
             <LayoutTemplate>
             <div class="table-responsive-sm">
             <table class="table">
@@ -42,6 +42,7 @@
                         <th scope="col">#</th>
                         <th scope="col">DATE ENCODED</th> 
                         <th scope="col">NAME</th>
+                        <th scope="col">STATUS</th>
                     </tr>
                </thead>
                     <asp:PlaceHolder runat="server" ID="groupPlaceHolder1"></asp:PlaceHolder>
@@ -82,6 +83,9 @@
                     </td>
                     <td>
                         <%# Eval("Name").ToString() %>
+                    </td> 
+                    <td>
+                        <%# Eval("IsActive").ToString().ToLower() == "false" ? "INACTIVE" : "ACTIVE" %>
                     </td> 
                 </tr>
             </ItemTemplate>

@@ -10,7 +10,7 @@
 namespace SampleApp.settings {
     
     
-    public partial class payment {
+    public partial class user {
         
         /// <summary>
         /// UpdatePanel1 control.

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleApp.settings {
+namespace SampleApp.transaction {
     
     
-    public partial class payment {
+    public partial class appraisal {
         
         /// <summary>
         /// UpdatePanel1 control.

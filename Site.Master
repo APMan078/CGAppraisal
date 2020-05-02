@@ -56,10 +56,10 @@
                             <ul class="dropdown-menu">
                                 <li><a runat="server" href="~/settings/bank">Bank</a></li>
                                 <li><a runat="server" href="~/settings/branch">Branch</a></li>
-                                <li><a href="#">Payment Details</a></li>
+                                <li><a runat="server" href="~/settings/payment">Payment Details</a></li>
                                 <li><a><hr></a></li>
                                 <li><a runat="server" href="~/settings/bank">Access</a></li>
-                                <li><a href="#">Users</a></li> 
+                                <li><a runat="server" href="~/settings/user">Users</a></li> 
                             </ul>
                         </li> 
                     </ul>

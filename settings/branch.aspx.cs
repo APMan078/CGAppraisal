@@ -53,5 +53,11 @@ namespace SampleApp.settings
                 lvItems.Items.Clear();
             }
         }
+
+        protected void lvItems_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (lvItems.FindControl("DataPager1") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            loadItem();
+        }
     }
 }

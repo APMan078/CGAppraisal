@@ -1,18 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="branch.aspx.cs" Inherits="SampleApp.settings.branch" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="appraisal.aspx.cs" Inherits="SampleApp.transaction.appraisal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="container">
+    <div class="container">
      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
         <div class="form-horizontal">
              <div class="form-group">
-                <h3 class="col-md-5">BANK BRANCH</h3>
+                <h3 class="col-md-5">PAYMENT</h3>
             </div>
             
             <hr />
 
             <div class="form-group">
                 <span class=" col-md-2">
-                <asp:LinkButton ID="createBank" runat="server" OnClick="createBank_Click">Create Bank Details</asp:LinkButton>
+                <asp:LinkButton ID="createPayment" runat="server"  >Create Payment Details</asp:LinkButton>
                 </span>
             </div>
             <br />
@@ -23,13 +23,13 @@
                 </span> 
                  <div class="col-md-2">
                      <br />
-                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btnsearch_Click" />
+                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success"  />
                  </div>
             </div>
         </div>
 
         <asp:ListView ID="lvItems" runat="server" GroupPlaceholderID="groupPlaceHolder1"
-            ItemPlaceholderID="itemPlaceHolder1" OnPagePropertiesChanging="lvItems_PagePropertiesChanging"   >
+            ItemPlaceholderID="itemPlaceHolder1" >
             <LayoutTemplate>
             <div class="table-responsive-sm">
             <table class="table">
@@ -42,7 +42,6 @@
                         <th scope="col">#</th>
                         <th scope="col">DATE ENCODED</th> 
                         <th scope="col">NAME</th>
-                        <th scope="col">BANK</th>
                         <th scope="col">STATUS</th>
                     </tr>
                </thead>
@@ -72,23 +71,19 @@
                 <tr>
                     <th class="row">  
                          <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Update a record" 
-                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' OnClick="btnupdt_Click" >
+                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' >
                         <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
                          </asp:LinkButton>
                     </th>  
                     <th scope="row">
                         <%# Eval("RowNo").ToString() %>
                     </th> 
-                    <td>
+                    <td> 
                         <%# Convert.ToDateTime(Eval("DateEncoded")).ToString("MM/dd/yyyy hh:mm tt") %>
                     </td>
                     <td>
                         <%# Eval("Name").ToString() %>
                     </td> 
-                    <td>
-                        <%# Eval("BankName").ToString() %>
-                    </td> 
-                    
                     <td>
                         <%# Eval("IsActive").ToString().ToLower() == "false" ? "INACTIVE" : "ACTIVE" %>
                     </td> 

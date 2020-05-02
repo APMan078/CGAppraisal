@@ -161,7 +161,11 @@
     <Content Include="settings\branchDetails.aspx" />
     <Content Include="settings\payment.aspx" />
     <Content Include="settings\paymentDetails.aspx" />
+    <Content Include="settings\user.aspx" />
+    <Content Include="settings\userDetails.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="appraisal\appraisal.aspx" />
+    <Content Include="appraisal\appraisalDetails.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -247,6 +251,20 @@
     <Compile Include="settings\paymentDetails.aspx.designer.cs">
       <DependentUpon>paymentDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="settings\user.aspx.cs">
+      <DependentUpon>user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="settings\user.aspx.designer.cs">
+      <DependentUpon>user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="settings\userDetails.aspx.cs">
+      <DependentUpon>userDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="settings\userDetails.aspx.designer.cs">
+      <DependentUpon>userDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -260,6 +278,20 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="appraisal\appraisal.aspx.cs">
+      <DependentUpon>appraisal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="appraisal\appraisal.aspx.designer.cs">
+      <DependentUpon>appraisal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="appraisal\appraisalDetails.aspx.cs">
+      <DependentUpon>appraisalDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="appraisal\appraisalDetails.aspx.designer.cs">
+      <DependentUpon>appraisalDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

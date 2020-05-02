@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="bankDetails.aspx.cs" Inherits="SampleApp.settings.bankDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="bankDetails.aspx.cs" Inherits="SampleApp.settings.bankDetails" EnableViewState="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server"> 
     <div class="form-horizontal">
         <div class="form-group">
@@ -16,7 +16,7 @@
         <div class="form-group">
             <div class="col-md-2"></div>
              <div class="col-md-10">
-                 <asp:CheckBox ID="isActive" runat="server" Checked="true" CssClass="form-check col-md-2" Text="Active"></asp:CheckBox>
+                 <asp:CheckBox ID="isActive" runat="server" Checked="true" CssClass="col-md-2" Text="Active"></asp:CheckBox>
              </div>
         </div> 
     <div class="container">
@@ -24,7 +24,6 @@
         <div class="col-md-10">
         <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-success"  OnClientClick="return confirm('Do you want to save this item?');" OnClick="btnSave_Click"/>
         <asp:Button ID="btnBackToList" runat="server" Text="Back to List" CssClass="btn btn-danger"  OnClientClick="return confirm('Back to list?');" OnClick="btnBackToList_Click" />
-    
         </div>
     </div>
     </div>
