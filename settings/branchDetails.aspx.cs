@@ -14,7 +14,11 @@ namespace SampleApp.settings
     {
         ArrayList arr = new ArrayList();
         protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/");
+            }
             if (!Page.IsPostBack)
             {
                 loadCbItems();

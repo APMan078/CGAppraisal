@@ -13,17 +13,20 @@ namespace SampleApp.settings
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/");
+            }
         }
         void loadItem()
         {
             lvItems.Items.Clear();
             using (DataTable dt = DataProcess.LoadPayment(string.Empty, txtKeyword.Text + "▲▲▲"))
             {
-                if (dt.Rows.Count == 0)
-                {
-                    return;
-                }
+                //if (dt.Rows.Count == 0)
+                //{
+                //    return;
+                //}
 
                 lvItems.DataSource = dt;
                 lvItems.DataBind();

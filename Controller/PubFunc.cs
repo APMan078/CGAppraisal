@@ -9,7 +9,7 @@ using System.Web;
 namespace SampleApp.Controller
 {
     public class PubFunc
-    {
+    { 
         public const string _stEncryptDecrypt = "XxxAsdzcD112@45$#";
         public static string Encrypt(string clearText)
         {

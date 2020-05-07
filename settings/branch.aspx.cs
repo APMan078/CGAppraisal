@@ -13,7 +13,10 @@ namespace SampleApp.settings
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/");
+            }
         }
         void loadItem()
         {

@@ -13,7 +13,10 @@ namespace SampleApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["id"] != null)
+            {
+                Response.Redirect("~/Dashboard.aspx");
+            }
         }
 
         protected void btnlogin_Click(object sender, EventArgs e)

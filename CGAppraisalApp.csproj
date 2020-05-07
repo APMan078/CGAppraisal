@@ -127,6 +127,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Images\404image.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -164,8 +165,8 @@
     <Content Include="settings\user.aspx" />
     <Content Include="settings\userDetails.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="appraisal\appraisal.aspx" />
-    <Content Include="appraisal\appraisalDetails.aspx" />
+    <Content Include="transaction\appraisal.aspx" />
+    <Content Include="transaction\appraisalDetails.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -208,6 +209,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="settings\bank.aspx.cs">
       <DependentUpon>bank.aspx</DependentUpon>
@@ -279,18 +281,18 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="appraisal\appraisal.aspx.cs">
+    <Compile Include="transaction\appraisal.aspx.cs">
       <DependentUpon>appraisal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="appraisal\appraisal.aspx.designer.cs">
+    <Compile Include="transaction\appraisal.aspx.designer.cs">
       <DependentUpon>appraisal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="appraisal\appraisalDetails.aspx.cs">
+    <Compile Include="transaction\appraisalDetails.aspx.cs">
       <DependentUpon>appraisalDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="appraisal\appraisalDetails.aspx.designer.cs">
+    <Compile Include="transaction\appraisalDetails.aspx.designer.cs">
       <DependentUpon>appraisalDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">

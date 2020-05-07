@@ -12,7 +12,11 @@ namespace SampleApp.settings
     public partial class bank : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/");
+            }
         }
 
         protected void createBank_Click(object sender, EventArgs e)

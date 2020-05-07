@@ -16,6 +16,10 @@ namespace SampleApp.settings
         bool isEdit = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/");
+            }
             if (!Page.IsPostBack)
             { 
                 id = Request.QueryString["id"];

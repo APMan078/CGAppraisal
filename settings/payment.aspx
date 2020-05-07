@@ -33,7 +33,7 @@
             <LayoutTemplate>
             <div class="table-responsive-sm">
             <table class="table">
-                <caption>List of Bank</caption>
+                <caption>List of Payment</caption>
                 <thead class="table-primary">
                     <tr>
                         <th class="col-1" scope="col">
@@ -89,6 +89,17 @@
                     </td> 
                 </tr>
             </ItemTemplate>
+             <EmptyDataTemplate>
+               <table class="emptyTable" cellpadding="5" cellspacing="5">
+                <tr>
+                  <td> 
+                  </td>
+                  <td>
+                    No record(s) Found.
+                  </td>
+                </tr>
+              </table>
+            </EmptyDataTemplate>
         </asp:ListView>
          
 

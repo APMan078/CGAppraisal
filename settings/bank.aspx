@@ -89,9 +89,18 @@
                     </td> 
                 </tr>
             </ItemTemplate>
-        </asp:ListView>
-         
-
+            <EmptyDataTemplate>
+               <table class="emptyTable" cellpadding="5" cellspacing="5">
+                <tr>
+                  <td> 
+                  </td>
+                  <td>
+                    No record(s) Found.
+                  </td>
+                </tr>
+              </table>
+            </EmptyDataTemplate>
+        </asp:ListView> 
         </ContentTemplate>
     </asp:UpdatePanel>
     </div>

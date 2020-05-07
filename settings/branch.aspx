@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <span class=" col-md-2">
-                <asp:LinkButton ID="createBank" runat="server" OnClick="createBank_Click">Create Bank Details</asp:LinkButton>
+                <asp:LinkButton ID="createBank" runat="server" OnClick="createBank_Click">Create Branch Details</asp:LinkButton>
                 </span>
             </div>
             <br />
@@ -33,7 +33,7 @@
             <LayoutTemplate>
             <div class="table-responsive-sm">
             <table class="table">
-                <caption>List of Bank</caption>
+                <caption>List of Branch</caption>
                 <thead class="table-primary">
                     <tr>
                         <th class="col-1" scope="col">
@@ -94,9 +94,18 @@
                     </td> 
                 </tr>
             </ItemTemplate>
-        </asp:ListView>
-         
-
+            <EmptyDataTemplate>
+               <table class="emptyTable" cellpadding="5" cellspacing="5">
+                <tr>
+                  <td> 
+                  </td>
+                  <td>
+                    No record(s) Found.
+                  </td>
+                </tr>
+              </table>
+            </EmptyDataTemplate>
+        </asp:ListView> 
         </ContentTemplate>
     </asp:UpdatePanel>
     </div>

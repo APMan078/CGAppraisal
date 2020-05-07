@@ -70,9 +70,14 @@
             <ItemTemplate>
                 <tr>
                     <th class="row">  
-                         <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Update a record" 
+                         <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Edit and View" 
                              CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' >
                         <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                         </asp:LinkButton>
+
+                         <asp:LinkButton ID="LinkButton1" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Print" 
+                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' >
+                        <i class="glyphicon glyphicon-print" aria-hidden="true"></i>
                          </asp:LinkButton>
                     </th>  
                     <th scope="row">
@@ -82,13 +87,24 @@
                         <%# Convert.ToDateTime(Eval("DateEncoded")).ToString("MM/dd/yyyy hh:mm tt") %>
                     </td>
                     <td>
-                        <%# Eval("Name").ToString() %>
+                        <%-- barch reference --%> 
                     </td> 
                     <td>
                         <%# Eval("IsActive").ToString().ToLower() == "false" ? "INACTIVE" : "ACTIVE" %>
                     </td> 
                 </tr>
             </ItemTemplate>
+            <EmptyDataTemplate>
+               <table class="emptyTable" cellpadding="5" cellspacing="5">
+                <tr>
+                  <td> 
+                  </td>
+                  <td>
+                    No record(s) Found.
+                  </td>
+                </tr>
+              </table>
+            </EmptyDataTemplate>
         </asp:ListView>
          
 
