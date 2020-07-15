@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CG_AppraisalModelStoreContainer" CdmEntityContainer="CG_AppraisalEntities">
+    <EntitySetMapping Name="SetAccesses">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.SetAccess">
+        <MappingFragment StoreEntitySet="SetAccess">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Access" ColumnName="Access" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SetBanks">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.SetBank">
+        <MappingFragment StoreEntitySet="SetBank">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SetBankBranches">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.SetBankBranch">
+        <MappingFragment StoreEntitySet="SetBankBranch">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SetPaymentDetails">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.SetPaymentDetail">
+        <MappingFragment StoreEntitySet="SetPaymentDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DefaultAmount" ColumnName="DefaultAmount" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SetUsers">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.SetUser">
+        <MappingFragment StoreEntitySet="SetUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="AccessId" ColumnName="AccessId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TxnAppraisals">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisal">
+        <MappingFragment StoreEntitySet="TxnAppraisal">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CTCNo" ColumnName="CTCNo" />
+          <ScalarProperty Name="WithVat" ColumnName="WithVat" />
+          <ScalarProperty Name="TimeTable" ColumnName="TimeTable" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="PurposeOfAvailingServices" ColumnName="PurposeOfAvailingServices" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="IsPrintedSOA" ColumnName="IsPrintedSOA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="BankBranchLoad" FunctionName="CG_AppraisalModel.Store.BankBranchLoad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CG_AppraisalModel.BankBranchLoad_Result">
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BankBranchSaveUpdate" FunctionName="CG_AppraisalModel.Store.BankBranchSaveUpdate" />
+    <FunctionImportMapping FunctionImportName="BankLoad" FunctionName="CG_AppraisalModel.Store.BankLoad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CG_AppraisalModel.BankLoad_Result">
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="BankSaveUpdate" FunctionName="CG_AppraisalModel.Store.BankSaveUpdate" />
+    <FunctionImportMapping FunctionImportName="PaymentDetailsLoad" FunctionName="CG_AppraisalModel.Store.PaymentDetailsLoad">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CG_AppraisalModel.PaymentDetailsLoad_Result">
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DefaultAmount" ColumnName="DefaultAmount" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PaymentDetailsSaveUpdate" FunctionName="CG_AppraisalModel.Store.PaymentDetailsSaveUpdate" />
+    <FunctionImportMapping FunctionImportName="SaveUpdateUser" FunctionName="CG_AppraisalModel.Store.SaveUpdateUser" />
+    <FunctionImportMapping FunctionImportName="UserLogin" FunctionName="CG_AppraisalModel.Store.UserLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CG_AppraisalModel.UserLogin_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateEncoded" ColumnName="DateEncoded" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="AccessId" ColumnName="AccessId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

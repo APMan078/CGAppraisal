@@ -16,15 +16,15 @@
                 </span>
             </div>
             <br />
-            <div class="form-group">                
-                <span class="col-md-4">
-                   Keyword:
-                    <asp:TextBox ID="txtKeyword" runat="server" CssClass="form-control"></asp:TextBox> 
+              <div class="form-group">      
+                <span class="col-md-1">Keyword:</span>
+                <span class="col-md-2"> 
+                    <asp:TextBox ID="txtKeyword" runat="server" class="form-control"></asp:TextBox> 
                 </span> 
-                 <div class="col-md-2">
-                     <br />
-                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btnsearch_Click1"  />
-                 </div>
+                 <span class="col-md-2">
+                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btnsearch_Click"/>
+                 </span>
+                 
             </div>
         </div>
 

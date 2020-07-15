@@ -57,7 +57,18 @@ namespace SampleApp.settings
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
+            string msg = DataProcess.SaveUpdatePaymentDetails(isEdit, id + "▲" + txtName.Text + "▲" + isActive.Checked + "▲" + Convert.ToDouble(txtDefaultAmount.Text) + "▲");
+            if (msg != "")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(),
+                    "ServerControlScript", @"alert(\" + msg + "\");", true);
+                Response.Redirect("~/settings/branch");
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(),
+                   "ServerControlScript", @"alert(\Error in saving\);", true);
+            }
         }
     }
 }

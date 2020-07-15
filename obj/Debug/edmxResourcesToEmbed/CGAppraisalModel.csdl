@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CG_AppraisalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SetAccess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Access" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SetBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DateEncoded" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SetBankBranches" Relationship="Self.FK_SetBankBranch_SetBank" FromRole="SetBank" ToRole="SetBankBranch" />
+  </EntityType>
+  <EntityType Name="SetBankBranch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="DateEncoded" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SetBank" Relationship="Self.FK_SetBankBranch_SetBank" FromRole="SetBankBranch" ToRole="SetBank" />
+    <NavigationProperty Name="TxnAppraisals" Relationship="Self.FK_TxnAppraisal_SetBankBranch" FromRole="SetBankBranch" ToRole="TxnAppraisal" />
+  </EntityType>
+  <EntityType Name="SetPaymentDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DefaultAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="DateEncoded" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateEncoded" Type="DateTime" Precision="3" />
+    <Property Name="FirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AccessId" Type="Int32" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TxnAppraisal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="BatchCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CTCNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="WithVat" Type="Boolean" />
+    <Property Name="TimeTable" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="PurposeOfAvailingServices" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StatusId" Type="Int32" />
+    <Property Name="IsPrintedSOA" Type="Boolean" />
+    <NavigationProperty Name="SetBankBranch" Relationship="Self.FK_TxnAppraisal_SetBankBranch" FromRole="TxnAppraisal" ToRole="SetBankBranch" />
+  </EntityType>
+  <Association Name="FK_SetBankBranch_SetBank">
+    <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
+    <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetBank">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SetBankBranch">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TxnAppraisal_SetBankBranch">
+    <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="0..1" />
+    <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetBankBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisal">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CG_AppraisalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SetAccesses" EntityType="Self.SetAccess" />
+    <EntitySet Name="SetBanks" EntityType="Self.SetBank" />
+    <EntitySet Name="SetBankBranches" EntityType="Self.SetBankBranch" />
+    <EntitySet Name="SetPaymentDetails" EntityType="Self.SetPaymentDetail" />
+    <EntitySet Name="SetUsers" EntityType="Self.SetUser" />
+    <EntitySet Name="TxnAppraisals" EntityType="Self.TxnAppraisal" />
+    <AssociationSet Name="FK_SetBankBranch_SetBank" Association="Self.FK_SetBankBranch_SetBank">
+      <End Role="SetBank" EntitySet="SetBanks" />
+      <End Role="SetBankBranch" EntitySet="SetBankBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisal_SetBankBranch" Association="Self.FK_TxnAppraisal_SetBankBranch">
+      <End Role="SetBankBranch" EntitySet="SetBankBranches" />
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+    </AssociationSet>
+    <FunctionImport Name="BankBranchLoad" ReturnType="Collection(CG_AppraisalModel.BankBranchLoad_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="keyword" Mode="In" Type="String" />
+      <Parameter Name="dateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dateto" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="BankBranchSaveUpdate">
+      <Parameter Name="isEdit" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="bankId" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="accountNo" Mode="In" Type="String" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="BankLoad" ReturnType="Collection(CG_AppraisalModel.BankLoad_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="keyword" Mode="In" Type="String" />
+      <Parameter Name="dateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dateto" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="BankSaveUpdate">
+      <Parameter Name="isEdit" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="PaymentDetailsLoad" ReturnType="Collection(CG_AppraisalModel.PaymentDetailsLoad_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="keyword" Mode="In" Type="String" />
+      <Parameter Name="dateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="dateto" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="PaymentDetailsSaveUpdate">
+      <Parameter Name="isEdit" Mode="In" Type="Boolean" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="defaultPayment" Mode="In" Type="Decimal" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="SaveUpdateUser">
+      <Parameter Name="IsEdit" Mode="In" Type="Boolean" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="MiddleName" Mode="In" Type="String" />
+      <Parameter Name="AccessId" Mode="In" Type="Int32" />
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="UserLogin" ReturnType="Collection(CG_AppraisalModel.UserLogin_Result)">
+      <Parameter Name="userName" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="BankBranchLoad_Result">
+    <Property Type="Int64" Name="RowNo" Nullable="true" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="BankId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="150" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="DateTime" Name="DateEncoded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="BankName" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="BankLoad_Result">
+    <Property Type="Int64" Name="RowNo" Nullable="true" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+    <Property Type="DateTime" Name="DateEncoded" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="PaymentDetailsLoad_Result">
+    <Property Type="Int64" Name="RowNo" Nullable="true" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="Decimal" Name="DefaultAmount" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="DateTime" Name="DateEncoded" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="UserLogin_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="DateEncoded" Nullable="true" Precision="23" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="AccessId" Nullable="true" />
+    <Property Type="String" Name="Username" Nullable="true" />
+    <Property Type="String" Name="Password" Nullable="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="true" />
+  </ComplexType>
+</Schema>

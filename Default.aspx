@@ -11,7 +11,7 @@
         <hr />
         <div class="form-group">
             <h4><asp:Label ID="Label1" runat="server" Text="Username:" CssClass="control-label col-md-2"></asp:Label></h4> 
-             <div class="col-md-10">
+             <div class="col-md-6">
                  <asp:TextBox ID="txtusername" runat="server" CssClass="form-control"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="validateUsername" runat="server" CssClass="text-danger" ErrorMessage="Please input username" ControlToValidate="txtusername"></asp:RequiredFieldValidator>
              </div>
@@ -20,7 +20,7 @@
          
         <div class="form-group">
             <h4><asp:Label ID="Label2" runat="server" Text="Password:" CssClass="control-label col-md-2"></asp:Label></h4> 
-             <div class="col-md-10">
+             <div class="col-md-6">
                  <asp:TextBox ID="txtpassword" TextMode="Password" runat="server" CssClass="form-control"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="validateLastname" runat="server" CssClass="text-danger" ErrorMessage="Please input password" ControlToValidate="txtpassword"></asp:RequiredFieldValidator>
              </div>

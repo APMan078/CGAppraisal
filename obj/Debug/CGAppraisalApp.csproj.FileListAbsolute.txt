@@ -146,3 +146,7 @@ C:\Users\Ralph\Source\Repos\CGAppraisal\obj\Debug\CGAppraisalApp.csproj.CoreComp
 C:\Users\Ralph\Source\Repos\CGAppraisal\obj\Debug\CGAppraisalApp.csproj.CopyComplete
 C:\Users\Ralph\Source\Repos\CGAppraisal\obj\Debug\SampleApp.dll
 C:\Users\Ralph\Source\Repos\CGAppraisal\obj\Debug\SampleApp.pdb
+C:\Users\Alvin Manalansan\source\repos\CGAppraisal\bin\EntityFramework.dll
+C:\Users\Alvin Manalansan\source\repos\CGAppraisal\bin\EntityFramework.SqlServer.dll
+C:\Users\Alvin Manalansan\source\repos\CGAppraisal\bin\EntityFramework.xml
+C:\Users\Alvin Manalansan\source\repos\CGAppraisal\bin\EntityFramework.SqlServer.xml

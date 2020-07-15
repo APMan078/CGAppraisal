@@ -15,10 +15,13 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
-
-
+TextBox {
+    box-sizing: border-box;
+    min-width: 100%;
+    max-width: 100%;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {
@@ -29,3 +32,4 @@ textarea {
         padding: 0;
     }
 }
+ 

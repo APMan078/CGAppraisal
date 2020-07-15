@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CG_AppraisalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="SetAccess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="Access" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="SetBank">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DateEncoded" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SetBankBranch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+    <Property Name="AccountNumber" Type="nvarchar" MaxLength="150" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DateEncoded" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SetPaymentDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="DefaultAmount" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="DateEncoded" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="SetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateEncoded" Type="datetime" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="150" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="150" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="150" />
+    <Property Name="AccessId" Type="int" />
+    <Property Name="Username" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="TxnAppraisal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="BatchCode" Type="nvarchar(max)" />
+    <Property Name="AccountName" Type="nvarchar(max)" />
+    <Property Name="CompanyName" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="CTCNo" Type="nvarchar" MaxLength="150" />
+    <Property Name="WithVat" Type="bit" />
+    <Property Name="TimeTable" Type="nvarchar" MaxLength="150" />
+    <Property Name="BranchId" Type="int" />
+    <Property Name="PurposeOfAvailingServices" Type="nvarchar(max)" />
+    <Property Name="StatusId" Type="int" />
+    <Property Name="IsPrintedSOA" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TxnAppraisalPaymentDetails">
+          <Property Name="TxnAppraisalId" Type="int" />
+          <Property Name="RowNo" Type="int" />
+          <Property Name="PaymentDetails" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TxnAppraisalPaymentLogs">
+          <Property Name="TxnAppraisalId" Type="int" />
+          <Property Name="TransactionDateTime" Type="datetime" />
+          <Property Name="Payment" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>-->
+  <Association Name="FK_SetBankBranch_SetBank">
+    <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
+    <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetBank">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SetBankBranch">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal" />-->
+  <Association Name="FK_TxnAppraisal_SetBankBranch">
+    <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="0..1" />
+    <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetBankBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisal">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal" />-->
+  <Function Name="BankBranchLoad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="keyword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="dateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dateto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="BankBranchSaveUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isEdit" Type="bit" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="bankId" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="accountNo" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="BankLoad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="keyword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="dateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dateto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="BankSaveUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isEdit" Type="bit" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="PaymentDetailsLoad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="keyword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="dateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="dateto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="PaymentDetailsSaveUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isEdit" Type="bit" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="name" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="defaultPayment" Type="numeric" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="SaveUpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IsEdit" Type="bit" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="MiddleName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AccessId" Type="int" Mode="In" />
+    <Parameter Name="Username" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="UserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="password" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="CG_AppraisalModelStoreContainer">
+    <EntitySet Name="SetAccess" EntityType="Self.SetAccess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SetBank" EntityType="Self.SetBank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SetBankBranch" EntityType="Self.SetBankBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SetPaymentDetails" EntityType="Self.SetPaymentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SetUser" EntityType="Self.SetUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TxnAppraisal" EntityType="Self.TxnAppraisal" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SetBankBranch_SetBank" Association="Self.FK_SetBankBranch_SetBank">
+      <End Role="SetBank" EntitySet="SetBank" />
+      <End Role="SetBankBranch" EntitySet="SetBankBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisal_SetBankBranch" Association="Self.FK_TxnAppraisal_SetBankBranch">
+      <End Role="SetBankBranch" EntitySet="SetBankBranch" />
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

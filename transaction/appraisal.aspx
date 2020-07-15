@@ -5,31 +5,54 @@
    <ContentTemplate>
         <div class="form-horizontal">
              <div class="form-group">
-                <h3 class="col-md-5">PAYMENT</h3>
+                <h3 class="col-md-5">Appraisal</h3>
             </div>
             
             <hr />
-
             <div class="form-group">
                 <span class=" col-md-2">
-                <asp:LinkButton ID="createPayment" runat="server"  >Create Payment Details</asp:LinkButton>
+                <asp:LinkButton ID="createItem" runat="server" OnClick="createItem_Click"  >Create Appraisal Details</asp:LinkButton>
                 </span>
             </div>
             <br />
-            <div class="form-group">                
-                <span class="col-md-4">
-                   Keyword:
-                    <asp:TextBox ID="txtKeyword" runat="server" CssClass="form-control"></asp:TextBox> 
-                </span> 
+
+             <div class="form-group">
+                <span class="control-label col-md-2">
+                    Date From:
+                </span>
+
+                <div class="col-md-2">
+                    <asp:TextBox ID="txtfrom" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
+                    <asp:LinkButton ID="lbfrom" runat="server" onclick="lbfrom_Click">PickDate...</asp:LinkButton>
+                   <asp:Calendar ID="clndrfrom" runat="server" Visible="False" OnSelectionChanged="clndrfrom_SelectionChanged"></asp:Calendar>
+                </div>
+
+                 <span class="control-label col-md-2">
+                    Date To:
+                </span>
                  <div class="col-md-2">
-                     <br />
-                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success"  />
-                 </div>
+                    <asp:TextBox ID="txtto" runat="server" CssClass="form-control" ReadOnly></asp:TextBox>
+                    <asp:LinkButton ID="LinkButton2" runat="server" onclick="lbto_Click">PickDate...</asp:LinkButton>
+                   <asp:Calendar ID="clndrto" runat="server" Visible="False" OnSelectionChanged="clndrto_SelectionChanged"></asp:Calendar>
+                </div>
+                 
+            </div>
+
+          
+            <div class="form-group">      
+                <span class="control-label col-md-2">Keyword:</span>
+                <span class="col-md-2"> 
+                    <asp:TextBox ID="txtKeyword" runat="server" class="form-control"></asp:TextBox> 
+                </span> 
+                 <span class="col-md-2">
+                     <asp:Button ID="btnsearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btnsearch_Click"/>
+                 </span>
+                 
             </div>
         </div>
 
         <asp:ListView ID="lvItems" runat="server" GroupPlaceholderID="groupPlaceHolder1"
-            ItemPlaceholderID="itemPlaceHolder1" >
+            ItemPlaceholderID="itemPlaceHolder1" OnPagePropertiesChanging="lvItems_PagePropertiesChanging" >
             <LayoutTemplate>
             <div class="table-responsive-sm">
             <table class="table">

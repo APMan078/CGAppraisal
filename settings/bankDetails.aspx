@@ -19,11 +19,14 @@
                  <asp:CheckBox ID="isActive" runat="server" Checked="true" CssClass="col-md-2" Text="Active"></asp:CheckBox>
              </div>
         </div> 
+
+
+
     <div class="container">
         <div class="col-md-2"></div>
         <div class="col-md-10">
         <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-success"  OnClientClick="return confirm('Do you want to save this item?');" OnClick="btnSave_Click"/>
-        <asp:Button ID="btnBackToList" runat="server" Text="Back to List" CssClass="btn btn-danger"  OnClientClick="return confirm('Back to list?');" OnClick="btnBackToList_Click" />
+        <asp:Button ID="btnBackToList" runat="server" Text="Back to List" CssClass="btn btn-danger" OnClientClick="return confirm('Are you sure you want to save this record?');"  OnClick="btnBackToList_Click" />
         </div>
     </div>
     </div>
