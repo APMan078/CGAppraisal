@@ -61,28 +61,40 @@
      <%--payment details  --%>
      <hr /> 
      <h3>Items</h3>  
-    <div class="container">
-        <asp:GridView ID="grdItems" runat="server" DataKeyNames="Items" AutoGenerateColumns="false" class="table">
+     <div class="container">
+        <asp:GridView ID="grdItems" runat="server" DataKeyNames="RowNo" AutoGenerateColumns="false" class="table">
         <Columns>
         <asp:TemplateField HeaderStyle-HorizontalAlign="Right">
-            <ItemTemplate>
-                <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-delete" tooltip="Delete" 
-                                CommandName="EmpEdit"  >
-                        <i class="glyphicon glyphicon-delete" aria-hidden="true"></i>
+            <ItemTemplate> 
+                <asp:LinkButton ID="btnRemove" runat="server" Text="Edit" CssClass="btn btn-danger" tooltip="Delete" CommandName="EmpEdit"  CommandArgument='<%# DataBinder.Eval(Container.DataItem, "RowNo") %>'
+                     OnClientClick="return confirm('Are you sure you?');">
+                        <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
                             </asp:LinkButton>
             </ItemTemplate>
         </asp:TemplateField>
         
-        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Period">
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Row No">
             <ItemTemplate>
-                <asp:TextBox ID="txtItems" runat="server" Text='<%# Eval("Items") %>'></asp:TextBox>
-            </ItemTemplate>
+                <asp:Label ID="txtRowNo" runat="server" Text='<%# Eval("RowNo") %>'></asp:Label>
+            </ItemTemplate> 
+        </asp:TemplateField>
+        
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Payment Details">
+            <ItemTemplate>
+                <asp:TextBox ID="txtPaymentDetails" runat="server" Text='<%# Eval("PaymentDetails") %>' CssClass="form-control"></asp:TextBox>
+            </ItemTemplate> 
+        </asp:TemplateField>
+
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Amount">
+            <ItemTemplate>
+                <asp:TextBox ID="txtAmount" runat="server" Text='<%# Eval("Amount") %>' CssClass="form-control" TextMode="Number"></asp:TextBox>
+            </ItemTemplate> 
         </asp:TemplateField>
 
         </Columns>
         </asp:GridView>
         <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Items" />
-    </div>
+     </div>
 
     <hr /> 
      <h3>Payment Details</h3>  

@@ -21,7 +21,7 @@ namespace SampleApp.transaction
 
             if (!IsPostBack)
             {
-                grdItems.DataSource = GetTableWithInitialData(); // get first initial data
+                grdItems.DataSource = GetTableWithNoData(); // get first initial data
                 grdItems.DataBind();
             }
 
@@ -38,13 +38,18 @@ namespace SampleApp.transaction
         {
             DataTable dt = GetTableWithNoData(); // get select column header only records not required
             DataRow dr;
-
+            int x = 0;
             foreach (GridViewRow gvr in grdItems.Rows)
             {
+                x = x + 1;
                 dr = dt.NewRow(); 
-                TextBox txtItem = gvr.FindControl("txtItem") as TextBox;
+               // TextBox txtItem = gvr.FindControl("txtRowNo") as TextBox;
+                TextBox txtDescription = gvr.FindControl("txtPaymentDetails") as TextBox;
+                TextBox txtAmount = gvr.FindControl("txtAmount") as TextBox;
 
-                dr[1] = txtItem.Text; 
+                dr["RowNo"] = x;
+                dr["PaymentDetails"] = txtDescription.Text;
+                dr["Amount"] = txtAmount.Text;
 
                 dt.Rows.Add(dr); // add grid values in to row and add row to the blank table
             }
@@ -57,8 +62,12 @@ namespace SampleApp.transaction
         }
         public DataTable GetTableWithNoData() // returns only structure if the select columns
         {
-            DataTable table = new DataTable(); 
-            table.Columns.Add("Description", typeof(string)); 
+            DataTable table = new DataTable();
+            table.Columns.Add("RowNo", typeof(string));
+            table.Columns.Add("PaymentDetails", typeof(string));
+            table.Columns.Add("Amount", typeof(string));
+
+            table.TableName = "ItemsPaymentDetails";
             return table;
         }
         protected void btnSave_Click(object sender, EventArgs e)

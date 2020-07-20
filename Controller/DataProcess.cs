@@ -22,7 +22,7 @@ namespace SampleApp.Controller
                 _dt.TableName = "dtmain";
                 return _dt;
             }
-        }
+        } 
 
         public static DataTable LoadBank(string id, string inputs)
         {

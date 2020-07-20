@@ -27,8 +27,25 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="text-danger" ErrorMessage="Please input lastname" ControlToValidate="txtLastname"></asp:RequiredFieldValidator>
             </div>
     </div> 
+            
+    <div class="form-group">
+        <h4><asp:Label ID="Label4" runat="server" Text="Username" CssClass="control-label col-md-2"></asp:Label></h4> 
+            <div class="col-md-10">
+                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="text-danger" 
+                    ErrorMessage="Please input Username" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>
+            </div>
+    </div> 
+    <div class="form-group">
+        <h4><asp:Label ID="Label5" runat="server" Text="Password" CssClass="control-label col-md-2"></asp:Label></h4> 
+            <div class="col-md-10">
+                <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="text-danger" 
+                    ErrorMessage="Please input Password" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
+            </div>
+    </div> 
          <%-- for  if checker and approer --%>
-    <hr /> 
+   <%-- <hr /> 
             
     <div class="form-group">
         <h4><asp:Label ID="Label4" runat="server" Text="SHOW IN SELECTION" CssClass="control-label col-md-2"></asp:Label></h4> 
@@ -37,14 +54,14 @@
                 <asp:CheckBox ID="chkNotedBy" runat="server" Checked="true" CssClass="form-check col-md-2" Text="Noted By"></asp:CheckBox>
             </div>
     </div> 
-    <hr />
+    <hr />--%>
 
             
      <%-- for  user access --%>
-    <hr /> 
+    <%--<hr /> 
     <div class="form-group">
         <h3 class="col-md-5">USER ACCESS</h3>  
-    </div>  
+    </div>  --%>
     <hr />
 
 

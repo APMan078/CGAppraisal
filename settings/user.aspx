@@ -5,14 +5,14 @@
    <ContentTemplate>
         <div class="form-horizontal">
              <div class="form-group">
-                <h3 class="col-md-5">PAYMENT</h3>
+                <h3 class="col-md-5">User</h3>
             </div>
             
             <hr />
 
             <div class="form-group">
                 <span class=" col-md-2">
-                <asp:LinkButton ID="createPayment" runat="server">Create Payment Details</asp:LinkButton>
+                <asp:LinkButton ID="createPayment" runat="server" OnClick="createPayment_Click">Create User Details</asp:LinkButton>
                 </span>
             </div>
             <br />
@@ -39,7 +39,7 @@
                         <th class="col-1" scope="col">
 
                         </th>  
-                        <th scope="col">#</th>
+                       <%-- <th scope="col">#</th>--%>
                         <th scope="col">DATE ENCODED</th> 
                         <th scope="col">FULL NAME</th>
                         <th scope="col">STATUS</th>
@@ -71,19 +71,18 @@
                 <tr>
                     <th class="row">  
                          <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Update a record" 
-                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' >
+                             CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>'  OnClick="btnupdt_Click" >
                         <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
                          </asp:LinkButton>
                     </th>  
-                    <th scope="row">
+                    <%--<th scope="row">
                         <%# Eval("RowNo").ToString() %>
-                    </th> 
+                    </th> --%>
                     <td>
                         <%# Convert.ToDateTime(Eval("DateEncoded")).ToString("MM/dd/yyyy hh:mm tt") %>
                     </td>
                     <td>
-                        <%# Eval("FullName").ToString() %>
-                    </td> 
+                         <%# Eval("Lastname").ToString() %> + ", " +<%# Eval("FirstName").ToString() %></td> 
                     <td>
                         <%# Eval("IsActive").ToString().ToLower() == "false" ? "INACTIVE" : "ACTIVE" %>
                     </td> 
