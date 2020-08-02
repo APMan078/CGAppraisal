@@ -11,6 +11,7 @@ namespace SampleApp.transaction
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (!IsPostBack)
             {
                 DateTime now = DateTime.Now;
@@ -90,6 +91,7 @@ namespace SampleApp.transaction
 
         protected void createItem_Click(object sender, EventArgs e)
         {
+            ViewState.Clear();
             Response.Redirect("~/transaction/appraisalDetails/");
         }
     }

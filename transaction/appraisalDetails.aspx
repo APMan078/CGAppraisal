@@ -10,7 +10,7 @@
         <div class="form-group">  
             <div class="col-md-4">
                 <label for="inputdefault">Batch Reference:</label>
-                <asp:TextBox ID="txtBatchReference" runat="server" CssClass="form-control"></asp:TextBox> 
+                <asp:TextBox ID="txtBatchReference" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox> 
             </div> 
         </div> 
         
@@ -48,8 +48,7 @@
           <div class="form-group row">
             <div class="col-md-6">
             <label for="txtTCTNo" class="control-label">Prepared By:</label> 
-                <asp:DropDownList ID="ddPreparedBy" runat="server" CssClass="form-control"></asp:DropDownList>
-                
+                <asp:DropDownList ID="ddPreparedBy" runat="server" CssClass="form-control"></asp:DropDownList> 
             </div>
              <div class="col-md-6">
                 <label for="txtTotalArea">Noted By</label>
@@ -59,29 +58,55 @@
     </div>
 
      <%--payment details  --%>
+
      <hr /> 
-     <h3>Items</h3>  
-     <div class="container">
-        <asp:GridView ID="grdItems" runat="server" DataKeyNames="RowNo" AutoGenerateColumns="false" class="table">
-        <Columns>
-        <asp:TemplateField HeaderStyle-HorizontalAlign="Right">
-            <ItemTemplate> 
-                <asp:LinkButton ID="btnRemove" runat="server" Text="Edit" CssClass="btn btn-danger" tooltip="Delete" CommandName="EmpEdit"  CommandArgument='<%# DataBinder.Eval(Container.DataItem, "RowNo") %>'
-                     OnClientClick="return confirm('Are you sure you?');">
-                        <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
-                            </asp:LinkButton>
-            </ItemTemplate>
+    <h3>Items</h3>
+    <div class="container">
+        <div class="col-md-2">
+            <asp:Button ID="btnAddRowItems" runat="server" Text="Add Item" CssClass="btn btn-primary" OnClick="btnAddRowItems_Click"/>
+        </div>
+        <div class="col-md-7"> 
+            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control" ></asp:DropDownList> 
+        </div> 
+    </div>
+
+
+    <br />
+     <div class="container"> 
+        <asp:GridView ID="grdItems" runat="server" DataKeyNames="RowNo" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDeleting="grdItems_RowDeleting" >
+        <Columns>         
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="#">
+            <ItemTemplate>
+                <asp:Label ID="lblRowNoItem" runat="server" Text='<%# Eval("RowNo") %>'></asp:Label>
+            </ItemTemplate> 
         </asp:TemplateField>
         
-        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Row No">
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Items">
             <ItemTemplate>
-                <asp:Label ID="txtRowNo" runat="server" Text='<%# Eval("RowNo") %>'></asp:Label>
+                <asp:TextBox ID="txtItem" runat="server" Text='<%# Eval("Item") %>' CssClass="form-control" autocomplete-="false"></asp:TextBox> 
+            </ItemTemplate> 
+        </asp:TemplateField> 
+
+        <asp:CommandField ShowDeleteButton="True" />
+        </Columns>
+        </asp:GridView>        
+     </div>
+
+     <hr /> 
+     <h3>PaymentDetails</h3>  
+     <div class="container">
+        <asp:GridView ID="grdPaymentDetails" runat="server" DataKeyNames="RowNo" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDeleting="grdPaymentDetails_RowDeleting">
+        <Columns> 
+        
+        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="#">
+            <ItemTemplate>
+                <asp:Label ID="lblRowNo" runat="server" Text='<%# Eval("RowNo") %>'></asp:Label>
             </ItemTemplate> 
         </asp:TemplateField>
         
         <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Payment Details">
             <ItemTemplate>
-                <asp:TextBox ID="txtPaymentDetails" runat="server" Text='<%# Eval("PaymentDetails") %>' CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtPaymentDetails" runat="server" Text='<%# Eval("PaymentDetails") %>' CssClass="form-control" autocomplete-="false"></asp:TextBox> 
             </ItemTemplate> 
         </asp:TemplateField>
 
@@ -90,56 +115,19 @@
                 <asp:TextBox ID="txtAmount" runat="server" Text='<%# Eval("Amount") %>' CssClass="form-control" TextMode="Number"></asp:TextBox>
             </ItemTemplate> 
         </asp:TemplateField>
+        <asp:CommandField ShowDeleteButton="True" />
 
         </Columns>
-        </asp:GridView>
-        <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Items" />
-     </div>
+        </asp:GridView> 
 
+        <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Payment Details" CssClass="btn btn-primary"/>
+     </div> 
+    <br />
     <hr /> 
-     <h3>Payment Details</h3>  
-    
-
-    <div class="container">
-        <div class="form-group row">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                     <label for="txtTimeTable" class="control-label">Time table:</label> 
-                     <asp:TextBox ID="txtTimeTable" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>  
-                </div>
-                <div class="col-md-1">
-                     <label for="CheckBox1" class="control-label"></label> 
-                    <asp:CheckBox ID="CheckBox1" runat="server" CssClass="checkbox" Text="Vat"/>
-                    
-                </div>
-            </div>  
-        </div>
-
-        <asp:GridView ID="GridView1" runat="server" DataKeyNames="PayScale" AutoGenerateColumns="false" class="table">
-        <Columns>
-        <asp:TemplateField HeaderStyle-HorizontalAlign="Left">
-            <ItemTemplate>
-                <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-delete" tooltip="Delete" 
-                                CommandName="EmpEdit"  >
-                        <i class="glyphicon glyphicon-delete" aria-hidden="true"></i>
-                            </asp:LinkButton>
-            </ItemTemplate>
-        </asp:TemplateField>
-        <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="Description">
-            <ItemTemplate>
-                <asp:TextBox ID="txtItems" runat="server" Text='<%# Eval("items") %>'></asp:TextBox>
-            </ItemTemplate>
-        </asp:TemplateField>
-         
-        </Columns>
-        </asp:GridView>
-        <asp:Button ID="Button1" runat="server" OnClick="btnAddRow_Click" Text="Add Row" />
-    </div>
-
-
     <div class="container"> 
         <div class="form-group">  
-            <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-success" OnClientClick="return confirm('Are you sure you want to save this record?');"  OnClick="btnSave_Click" />
+            <%--<asp:Button ID="btnNext" runat="server" Text="Save" CssClass="btn btn-success" OnClientClick="return confirm('Are you sure you want to save this record?');"  OnClick="btnSave_Click" />--%>
+            <asp:Button ID="btnNext" runat="server" Text="Next" CssClass="btn btn-success"   OnClick="btnSave_Click" />
             <asp:Button ID="btnBackToList" runat="server" Text="Back to List" CssClass="btn btn-danger"/>  
         </div>
     </div> 

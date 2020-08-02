@@ -33,6 +33,9 @@ namespace SampleApp
         public virtual DbSet<SetPaymentDetail> SetPaymentDetails { get; set; }
         public virtual DbSet<SetUser> SetUsers { get; set; }
         public virtual DbSet<TxnAppraisal> TxnAppraisals { get; set; }
+        public virtual DbSet<TxnAppraisalItem> TxnAppraisalItems { get; set; }
+        public virtual DbSet<TxnAppraisalPaymentDetail> TxnAppraisalPaymentDetails { get; set; }
+        public virtual DbSet<TxnAppraisalPaymentLog> TxnAppraisalPaymentLogs { get; set; }
     
         public virtual ObjectResult<BankBranchLoad_Result> BankBranchLoad(Nullable<int> id, string keyword, Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateto)
         {

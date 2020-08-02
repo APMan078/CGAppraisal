@@ -133,5 +133,35 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="TxnAppraisalItems">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisalItem">
+        <MappingFragment StoreEntitySet="TxnAppraisalItem">
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+          <ScalarProperty Name="TnxAppraisalId" ColumnName="TnxAppraisalId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TxnAppraisalPaymentDetails">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisalPaymentDetail">
+        <MappingFragment StoreEntitySet="TxnAppraisalPaymentDetails">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentDetails" ColumnName="PaymentDetails" />
+          <ScalarProperty Name="RowNo" ColumnName="RowNo" />
+          <ScalarProperty Name="TxnAppraisalId" ColumnName="TxnAppraisalId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TxnAppraisalPaymentLogs">
+      <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisalPaymentLog">
+        <MappingFragment StoreEntitySet="TxnAppraisalPaymentLogs">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="TransactionDateTime" ColumnName="TransactionDateTime" />
+          <ScalarProperty Name="TxnAppraisalId" ColumnName="TxnAppraisalId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

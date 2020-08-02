@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -195,6 +198,8 @@
     <Content Include="Site.Master" />
     <Content Include="transaction\appraisal.aspx" />
     <Content Include="transaction\appraisalDetails.aspx" />
+    <Content Include="transaction\appraisalDetailsItem.aspx" />
+    <Content Include="transaction\appraisalDetailsPayment.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -370,7 +375,30 @@
     <Compile Include="transaction\appraisalDetails.aspx.designer.cs">
       <DependentUpon>appraisalDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="transaction\appraisalDetailsItem.aspx.cs">
+      <DependentUpon>appraisalDetailsItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="transaction\appraisalDetailsItem.aspx.designer.cs">
+      <DependentUpon>appraisalDetailsItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="transaction\appraisalDetailsPayment.aspx.cs">
+      <DependentUpon>appraisalDetailsPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="transaction\appraisalDetailsPayment.aspx.designer.cs">
+      <DependentUpon>appraisalDetailsPayment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TxnAppraisal.cs">
+      <DependentUpon>CGAppraisalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TxnAppraisalItem.cs">
+      <DependentUpon>CGAppraisalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TxnAppraisalPaymentDetail.cs">
+      <DependentUpon>CGAppraisalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TxnAppraisalPaymentLog.cs">
       <DependentUpon>CGAppraisalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserLogin_Result.cs">

@@ -71,22 +71,38 @@
     <Property Name="IsPrintedSOA" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TxnAppraisalPaymentDetails">
-          <Property Name="TxnAppraisalId" Type="int" />
-          <Property Name="RowNo" Type="int" />
-          <Property Name="PaymentDetails" Type="nvarchar(max)" />
-          <Property Name="Amount" Type="numeric" Precision="10" Scale="2" />
-        </EntityType>-->
+warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TxnAppraisalItem">
+    <Key>
+      <PropertyRef Name="TnxAppraisalId" />
+    </Key>
+    <Property Name="TnxAppraisalId" Type="int" Nullable="false" />
+    <Property Name="RowNo" Type="int" />
+    <Property Name="ItemDescription" Type="nvarchar(max)" />
+  </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TxnAppraisalPaymentLogs">
-          <Property Name="TxnAppraisalId" Type="int" />
-          <Property Name="TransactionDateTime" Type="datetime" />
-          <Property Name="Payment" Type="numeric" Precision="10" Scale="2" />
-          <Property Name="Notes" Type="nvarchar(max)" />
-          <Property Name="UserId" Type="int" />
-        </EntityType>-->
+warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TxnAppraisalPaymentDetails">
+    <Key>
+      <PropertyRef Name="TxnAppraisalId" />
+    </Key>
+    <Property Name="TxnAppraisalId" Type="int" Nullable="false" />
+    <Property Name="RowNo" Type="int" />
+    <Property Name="PaymentDetails" Type="nvarchar(max)" />
+    <Property Name="Amount" Type="numeric" Precision="10" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TxnAppraisalPaymentLogs">
+    <Key>
+      <PropertyRef Name="TxnAppraisalId" />
+    </Key>
+    <Property Name="TxnAppraisalId" Type="int" Nullable="false" />
+    <Property Name="TransactionDateTime" Type="datetime" />
+    <Property Name="Payment" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
   <Association Name="FK_SetBankBranch_SetBank">
     <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
     <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="*" />
@@ -99,9 +115,18 @@ warning 6013: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal" />-->
+  <Association Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal">
+    <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="1" />
+    <End Role="TxnAppraisalPaymentDetails" Type="Self.TxnAppraisalPaymentDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalPaymentDetails">
+        <PropertyRef Name="TxnAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TxnAppraisal_SetBankBranch">
     <End Role="SetBankBranch" Type="Self.SetBankBranch" Multiplicity="0..1" />
     <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="*" />
@@ -114,9 +139,30 @@ error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentDetails' is reference
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal" />-->
+  <Association Name="FK_TxnAppraisalItem_TxnAppraisal">
+    <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="1" />
+    <End Role="TxnAppraisalItem" Type="Self.TxnAppraisalItem" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalItem">
+        <PropertyRef Name="TnxAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal">
+    <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="1" />
+    <End Role="TxnAppraisalPaymentLogs" Type="Self.TxnAppraisalPaymentLogs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalPaymentLogs">
+        <PropertyRef Name="TxnAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="BankBranchLoad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
     <Parameter Name="keyword" Type="nvarchar(max)" Mode="In" />
@@ -178,13 +224,49 @@ error 6004: The table 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' is referenced b
     <EntitySet Name="SetPaymentDetails" EntityType="Self.SetPaymentDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SetUser" EntityType="Self.SetUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TxnAppraisal" EntityType="Self.TxnAppraisal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TxnAppraisalItem" EntityType="Self.TxnAppraisalItem" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TxnAppraisalItem].[TnxAppraisalId] AS [TnxAppraisalId], 
+    [TxnAppraisalItem].[RowNo] AS [RowNo], 
+    [TxnAppraisalItem].[ItemDescription] AS [ItemDescription]
+    FROM [dbo].[TxnAppraisalItem] AS [TxnAppraisalItem]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TxnAppraisalPaymentDetails" EntityType="Self.TxnAppraisalPaymentDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TxnAppraisalPaymentDetails].[TxnAppraisalId] AS [TxnAppraisalId], 
+    [TxnAppraisalPaymentDetails].[RowNo] AS [RowNo], 
+    [TxnAppraisalPaymentDetails].[PaymentDetails] AS [PaymentDetails], 
+    [TxnAppraisalPaymentDetails].[Amount] AS [Amount]
+    FROM [dbo].[TxnAppraisalPaymentDetails] AS [TxnAppraisalPaymentDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TxnAppraisalPaymentLogs" EntityType="Self.TxnAppraisalPaymentLogs" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TxnAppraisalPaymentLogs].[TxnAppraisalId] AS [TxnAppraisalId], 
+    [TxnAppraisalPaymentLogs].[TransactionDateTime] AS [TransactionDateTime], 
+    [TxnAppraisalPaymentLogs].[Payment] AS [Payment], 
+    [TxnAppraisalPaymentLogs].[Notes] AS [Notes], 
+    [TxnAppraisalPaymentLogs].[UserId] AS [UserId]
+    FROM [dbo].[TxnAppraisalPaymentLogs] AS [TxnAppraisalPaymentLogs]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_SetBankBranch_SetBank" Association="Self.FK_SetBankBranch_SetBank">
       <End Role="SetBank" EntitySet="SetBank" />
       <End Role="SetBankBranch" EntitySet="SetBankBranch" />
     </AssociationSet>
+    <AssociationSet Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal" Association="Self.FK_TxnApprailsaPaymentDetails_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+      <End Role="TxnAppraisalPaymentDetails" EntitySet="TxnAppraisalPaymentDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_TxnAppraisal_SetBankBranch" Association="Self.FK_TxnAppraisal_SetBankBranch">
       <End Role="SetBankBranch" EntitySet="SetBankBranch" />
       <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisalItem_TxnAppraisal" Association="Self.FK_TxnAppraisalItem_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+      <End Role="TxnAppraisalItem" EntitySet="TxnAppraisalItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal" Association="Self.FK_TxnAppraisalPaymentLogs_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+      <End Role="TxnAppraisalPaymentLogs" EntitySet="TxnAppraisalPaymentLogs" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

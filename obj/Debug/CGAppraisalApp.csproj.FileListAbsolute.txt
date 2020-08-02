@@ -227,3 +227,5 @@ C:\Users\r5\Source\Repos\CGAppraisal\obj\Debug\CGAppraisalApp.csproj.CoreCompile
 C:\Users\r5\Source\Repos\CGAppraisal\obj\Debug\CGAppraisalApp.csproj.CopyComplete
 C:\Users\r5\Source\Repos\CGAppraisal\obj\Debug\SampleApp.dll
 C:\Users\r5\Source\Repos\CGAppraisal\obj\Debug\SampleApp.pdb
+C:\Users\r5\source\repos\CGAppraisal\obj\Debug\CGAppraisalApp.csprojAssemblyReference.cache
+C:\Users\r5\Source\Repos\CGAppraisal\bin\AjaxControlToolkit.dll

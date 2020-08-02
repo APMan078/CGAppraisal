@@ -73,6 +73,9 @@
     <Property Name="StatusId" Type="Int32" />
     <Property Name="IsPrintedSOA" Type="Boolean" />
     <NavigationProperty Name="SetBankBranch" Relationship="Self.FK_TxnAppraisal_SetBankBranch" FromRole="TxnAppraisal" ToRole="SetBankBranch" />
+    <NavigationProperty Name="TxnAppraisalItem" Relationship="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalItem" />
+    <NavigationProperty Name="TxnAppraisalPaymentDetail" Relationship="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentDetail" />
+    <NavigationProperty Name="TxnAppraisalPaymentLog" Relationship="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentLog" />
   </EntityType>
   <Association Name="FK_SetBankBranch_SetBank">
     <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
@@ -167,6 +170,21 @@
       <Parameter Name="userName" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="TxnAppraisalItems" EntityType="CG_AppraisalModel.TxnAppraisalItem" />
+    <AssociationSet Name="FK_TxnAppraisalItem_TxnAppraisal" Association="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+      <End Role="TxnAppraisalItem" EntitySet="TxnAppraisalItems" />
+    </AssociationSet>
+    <EntitySet Name="TxnAppraisalPaymentDetails" EntityType="CG_AppraisalModel.TxnAppraisalPaymentDetail" />
+    <AssociationSet Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal" Association="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+      <End Role="TxnAppraisalPaymentDetail" EntitySet="TxnAppraisalPaymentDetails" />
+    </AssociationSet>
+    <EntitySet Name="TxnAppraisalPaymentLogs" EntityType="CG_AppraisalModel.TxnAppraisalPaymentLog" />
+    <AssociationSet Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal" Association="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal">
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+      <End Role="TxnAppraisalPaymentLog" EntitySet="TxnAppraisalPaymentLogs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="BankBranchLoad_Result">
     <Property Type="Int64" Name="RowNo" Nullable="true" />
@@ -204,4 +222,70 @@
     <Property Type="String" Name="Password" Nullable="true" />
     <Property Type="Boolean" Name="IsActive" Nullable="true" />
   </ComplexType>
+  <EntityType Name="TxnAppraisalItem">
+    <Key>
+      <PropertyRef Name="TnxAppraisalId" />
+    </Key>
+    <Property Name="TnxAppraisalId" Type="Int32" Nullable="false" />
+    <Property Name="RowNo" Type="Int32" />
+    <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TxnAppraisal" Relationship="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal" FromRole="TxnAppraisalItem" ToRole="TxnAppraisal" />
+  </EntityType>
+  <Association Name="FK_TxnAppraisalItem_TxnAppraisal">
+    <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="1" />
+    <End Type="CG_AppraisalModel.TxnAppraisalItem" Role="TxnAppraisalItem" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalItem">
+        <PropertyRef Name="TnxAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TxnAppraisalPaymentDetail">
+    <Key>
+      <PropertyRef Name="TxnAppraisalId" />
+    </Key>
+    <Property Name="TxnAppraisalId" Type="Int32" Nullable="false" />
+    <Property Name="RowNo" Type="Int32" />
+    <Property Name="PaymentDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="TxnAppraisal" Relationship="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" FromRole="TxnAppraisalPaymentDetail" ToRole="TxnAppraisal" />
+  </EntityType>
+  <Association Name="FK_TxnApprailsaPaymentDetails_TxnAppraisal">
+    <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="1" />
+    <End Type="CG_AppraisalModel.TxnAppraisalPaymentDetail" Role="TxnAppraisalPaymentDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalPaymentDetail">
+        <PropertyRef Name="TxnAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TxnAppraisalPaymentLog">
+    <Key>
+      <PropertyRef Name="TxnAppraisalId" />
+    </Key>
+    <Property Name="TxnAppraisalId" Type="Int32" Nullable="false" />
+    <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
+    <Property Name="Payment" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="TxnAppraisal" Relationship="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" FromRole="TxnAppraisalPaymentLog" ToRole="TxnAppraisal" />
+  </EntityType>
+  <Association Name="FK_TxnAppraisalPaymentLogs_TxnAppraisal">
+    <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="1" />
+    <End Type="CG_AppraisalModel.TxnAppraisalPaymentLog" Role="TxnAppraisalPaymentLog" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TxnAppraisal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisalPaymentLog">
+        <PropertyRef Name="TxnAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

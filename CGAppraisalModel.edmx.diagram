@@ -4,15 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="81b04b9292954c288acef1284830b6a1" Name="Diagram1">
+      <Diagram DiagramId="81b04b9292954c288acef1284830b6a1" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="CG_AppraisalModel.SetAccess" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CG_AppraisalModel.SetBank" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CG_AppraisalModel.SetBankBranch" Width="1.5" PointX="4" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CG_AppraisalModel.SetBankBranch" Width="1.5" PointX="3.375" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="CG_AppraisalModel.SetPaymentDetail" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CG_AppraisalModel.SetUser" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisal" Width="1.5" PointX="7.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisal" Width="1.5" PointX="6.875" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="CG_AppraisalModel.FK_SetBankBranch_SetBank" ManuallyRouted="false" />
         <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisal_SetBankBranch" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisalItem" Width="1.5" PointX="9.375" PointY="2.25" />
+        <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal" />
+        <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisalPaymentDetail" Width="1.5" PointX="9.125" PointY="4.875" />
+        <AssociationConnector Association="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" />
+        <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisalPaymentLog" Width="1.5" PointX="9.125" PointY="7.875" />
+        <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
