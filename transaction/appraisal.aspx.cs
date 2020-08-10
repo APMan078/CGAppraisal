@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SampleApp.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -91,8 +92,26 @@ namespace SampleApp.transaction
 
         protected void createItem_Click(object sender, EventArgs e)
         {
+            Session["transaction"] = "appraisalDetails";
+
             ViewState.Clear();
+            PublicVariables.pubTxnAppraisal.Clear();
             Response.Redirect("~/transaction/appraisalDetails/");
+        }
+        protected void btnupdt_Click(object sender, EventArgs e)
+        {
+            Session["transaction"] = "appraisalDetails";
+            LinkButton item = (LinkButton)sender;
+            if (item.CommandArgument != null)
+            {
+                Response.Redirect("~/settings/appraisalDetails?id=" + item.CommandArgument);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(),
+                      "ServerControlScript", "alert(\"Item is not Exist!\");", true);
+                lvItems.Items.Clear();
+            }
         }
     }
 }

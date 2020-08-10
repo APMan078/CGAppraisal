@@ -13,6 +13,15 @@ namespace SampleApp.transaction {
     public partial class appraisalDetails {
         
         /// <summary>
+        /// appraisalItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel appraisalItem;
+        
+        /// <summary>
         /// lblIsEdit control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,42 @@ namespace SampleApp.transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIsEdit;
+        
+        /// <summary>
+        /// lblHidden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHidden;
+        
+        /// <summary>
+        /// mpePopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mpePopUp;
+        
+        /// <summary>
+        /// lblText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblText;
+        
+        /// <summary>
+        /// btnOk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnOk;
         
         /// <summary>
         /// txtBatchReference control.
@@ -121,15 +166,6 @@ namespace SampleApp.transaction {
         protected global::System.Web.UI.WebControls.GridView grdItems;
         
         /// <summary>
-        /// grdPaymentDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPaymentDetails;
-        
-        /// <summary>
         /// btnAddRow control.
         /// </summary>
         /// <remarks>
@@ -137,6 +173,15 @@ namespace SampleApp.transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddRow;
+        
+        /// <summary>
+        /// grdPaymentDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdPaymentDetails;
         
         /// <summary>
         /// btnNext control.

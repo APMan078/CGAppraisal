@@ -14,6 +14,13 @@ namespace SampleApp
     
     public partial class SetUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SetUser()
+        {
+            this.TxnAppraisals = new HashSet<TxnAppraisal>();
+            this.TxnAppraisals1 = new HashSet<TxnAppraisal>();
+        }
+    
         public int Id { get; set; }
         public Nullable<System.DateTime> DateEncoded { get; set; }
         public string FirstName { get; set; }
@@ -23,5 +30,10 @@ namespace SampleApp
         public string Username { get; set; }
         public string Password { get; set; }
         public Nullable<bool> IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TxnAppraisal> TxnAppraisals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TxnAppraisal> TxnAppraisals1 { get; set; }
     }
 }

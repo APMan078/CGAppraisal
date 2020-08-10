@@ -17,11 +17,6 @@ namespace SampleApp.transaction
 
             if (!IsPostBack)
             {
-                if(ViewState["doneDetails"] == null)
-                {
-                    Response.Redirect("~/transaction/appraisalDetails/");
-                }
-
                 var dtCbItems = new DataTable();
                 dtCbItems.Columns.Clear();
                 dtCbItems.Columns.Add("item", typeof(string));
@@ -182,5 +177,9 @@ namespace SampleApp.transaction
             }
         }
 
+        protected void btnBackToList_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/transaction/appraisalDetails");
+        }
     }
 }

@@ -26,10 +26,15 @@ namespace SampleApp
         public string PurposeOfAvailingServices { get; set; }
         public Nullable<int> StatusId { get; set; }
         public Nullable<bool> IsPrintedSOA { get; set; }
+        public Nullable<int> NotedBy { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
+        public string TotalProperty { get; set; }
     
         public virtual SetBankBranch SetBankBranch { get; set; }
         public virtual TxnAppraisalItem TxnAppraisalItem { get; set; }
         public virtual TxnAppraisalPaymentDetail TxnAppraisalPaymentDetail { get; set; }
         public virtual TxnAppraisalPaymentLog TxnAppraisalPaymentLog { get; set; }
+        public virtual SetUser SetUser { get; set; }
+        public virtual SetUser SetUser1 { get; set; }
     }
 }

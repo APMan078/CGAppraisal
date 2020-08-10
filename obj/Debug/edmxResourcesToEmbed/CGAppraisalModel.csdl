@@ -55,6 +55,8 @@
     <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="TxnAppraisals" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy" FromRole="SetUser" ToRole="TxnAppraisal" />
+    <NavigationProperty Name="TxnAppraisals1" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy" FromRole="SetUser" ToRole="TxnAppraisal" />
   </EntityType>
   <EntityType Name="TxnAppraisal">
     <Key>
@@ -76,6 +78,11 @@
     <NavigationProperty Name="TxnAppraisalItem" Relationship="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalItem" />
     <NavigationProperty Name="TxnAppraisalPaymentDetail" Relationship="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentDetail" />
     <NavigationProperty Name="TxnAppraisalPaymentLog" Relationship="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentLog" />
+    <Property Name="NotedBy" Type="Int32" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <NavigationProperty Name="SetUser" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy" FromRole="TxnAppraisal" ToRole="SetUser" />
+    <NavigationProperty Name="SetUser1" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy" FromRole="TxnAppraisal" ToRole="SetUser" />
+    <Property Name="TotalProperty" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_SetBankBranch_SetBank">
     <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
@@ -185,6 +192,14 @@
       <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
       <End Role="TxnAppraisalPaymentLog" EntitySet="TxnAppraisalPaymentLogs" />
     </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisal_SetUserApprovedBy" Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy">
+      <End Role="SetUser" EntitySet="SetUsers" />
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TxnAppraisal_SetUserNotedBy" Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy">
+      <End Role="SetUser" EntitySet="SetUsers" />
+      <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="BankBranchLoad_Result">
     <Property Type="Int64" Name="RowNo" Nullable="true" />
@@ -285,6 +300,30 @@
       </Principal>
       <Dependent Role="TxnAppraisalPaymentLog">
         <PropertyRef Name="TxnAppraisalId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TxnAppraisal_SetUserApprovedBy">
+    <End Type="CG_AppraisalModel.SetUser" Role="SetUser" Multiplicity="0..1" />
+    <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisal">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TxnAppraisal_SetUserNotedBy">
+    <End Type="CG_AppraisalModel.SetUser" Role="SetUser" Multiplicity="0..1" />
+    <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TxnAppraisal">
+        <PropertyRef Name="NotedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

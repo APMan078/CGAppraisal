@@ -74,6 +74,9 @@
           <Property Name="PurposeOfAvailingServices" Type="nvarchar(max)" />
           <Property Name="StatusId" Type="int" />
           <Property Name="IsPrintedSOA" Type="bit" />
+          <Property Name="NotedBy" Type="int" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="TotalProperty" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -141,6 +144,30 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
             </Principal>
             <Dependent Role="TxnAppraisal">
               <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TxnAppraisal_SetUserApprovedBy">
+          <End Role="SetUser" Type="Self.SetUser" Multiplicity="0..1" />
+          <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TxnAppraisal">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TxnAppraisal_SetUserNotedBy">
+          <End Role="SetUser" Type="Self.SetUser" Multiplicity="0..1" />
+          <End Role="TxnAppraisal" Type="Self.TxnAppraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TxnAppraisal">
+              <PropertyRef Name="NotedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,6 +292,14 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
             <End Role="SetBankBranch" EntitySet="SetBankBranch" />
             <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
           </AssociationSet>
+          <AssociationSet Name="FK_TxnAppraisal_SetUserApprovedBy" Association="Self.FK_TxnAppraisal_SetUserApprovedBy">
+            <End Role="SetUser" EntitySet="SetUser" />
+            <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TxnAppraisal_SetUserNotedBy" Association="Self.FK_TxnAppraisal_SetUserNotedBy">
+            <End Role="SetUser" EntitySet="SetUser" />
+            <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
+          </AssociationSet>
           <AssociationSet Name="FK_TxnAppraisalItem_TxnAppraisal" Association="Self.FK_TxnAppraisalItem_TxnAppraisal">
             <End Role="TxnAppraisal" EntitySet="TxnAppraisal" />
             <End Role="TxnAppraisalItem" EntitySet="TxnAppraisalItem" />
@@ -333,6 +368,8 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="TxnAppraisals" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy" FromRole="SetUser" ToRole="TxnAppraisal" />
+          <NavigationProperty Name="TxnAppraisals1" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy" FromRole="SetUser" ToRole="TxnAppraisal" />
         </EntityType>
         <EntityType Name="TxnAppraisal">
           <Key>
@@ -354,6 +391,11 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
           <NavigationProperty Name="TxnAppraisalItem" Relationship="CG_AppraisalModel.FK_TxnAppraisalItem_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalItem" />
           <NavigationProperty Name="TxnAppraisalPaymentDetail" Relationship="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentDetail" />
           <NavigationProperty Name="TxnAppraisalPaymentLog" Relationship="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" FromRole="TxnAppraisal" ToRole="TxnAppraisalPaymentLog" />
+          <Property Name="NotedBy" Type="Int32" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <NavigationProperty Name="SetUser" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy" FromRole="TxnAppraisal" ToRole="SetUser" />
+          <NavigationProperty Name="SetUser1" Relationship="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy" FromRole="TxnAppraisal" ToRole="SetUser" />
+          <Property Name="TotalProperty" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SetBankBranch_SetBank">
           <End Role="SetBank" Type="Self.SetBank" Multiplicity="0..1" />
@@ -463,6 +505,14 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
             <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
             <End Role="TxnAppraisalPaymentLog" EntitySet="TxnAppraisalPaymentLogs" />
           </AssociationSet>
+          <AssociationSet Name="FK_TxnAppraisal_SetUserApprovedBy" Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy">
+            <End Role="SetUser" EntitySet="SetUsers" />
+            <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TxnAppraisal_SetUserNotedBy" Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy">
+            <End Role="SetUser" EntitySet="SetUsers" />
+            <End Role="TxnAppraisal" EntitySet="TxnAppraisals" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="BankBranchLoad_Result">
           <Property Type="Int64" Name="RowNo" Nullable="true" />
@@ -566,6 +616,30 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TxnAppraisal_SetUserApprovedBy">
+          <End Type="CG_AppraisalModel.SetUser" Role="SetUser" Multiplicity="0..1" />
+          <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TxnAppraisal">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TxnAppraisal_SetUserNotedBy">
+          <End Type="CG_AppraisalModel.SetUser" Role="SetUser" Multiplicity="0..1" />
+          <End Type="CG_AppraisalModel.TxnAppraisal" Role="TxnAppraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TxnAppraisal">
+              <PropertyRef Name="NotedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -633,6 +707,9 @@ warning 6002: The table/view 'CG_Appraisal.dbo.TxnAppraisalPaymentLogs' does not
           <EntitySetMapping Name="TxnAppraisals">
             <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisal">
               <MappingFragment StoreEntitySet="TxnAppraisal">
+                <ScalarProperty Name="TotalProperty" ColumnName="TotalProperty" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="NotedBy" ColumnName="NotedBy" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />

@@ -19,6 +19,8 @@
         <AssociationConnector Association="CG_AppraisalModel.FK_TxnApprailsaPaymentDetails_TxnAppraisal" />
         <EntityTypeShape EntityType="CG_AppraisalModel.TxnAppraisalPaymentLog" Width="1.5" PointX="9.125" PointY="7.875" />
         <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisalPaymentLogs_TxnAppraisal" />
+        <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserApprovedBy" />
+        <AssociationConnector Association="CG_AppraisalModel.FK_TxnAppraisal_SetUserNotedBy" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

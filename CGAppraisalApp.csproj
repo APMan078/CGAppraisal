@@ -246,6 +246,7 @@
     <Compile Include="Controller\DataProcess.cs" />
     <Compile Include="Controller\FW_DataProcess.cs" />
     <Compile Include="Controller\PubFunc.cs" />
+    <Compile Include="Controller\PublicVariables.cs" />
     <Compile Include="Controller\SQLProcess.cs" />
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>

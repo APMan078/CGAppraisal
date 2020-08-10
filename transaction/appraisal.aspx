@@ -95,7 +95,7 @@
                     <th class="row">  
                          <asp:LinkButton ID="btnupdt" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Edit and View" 
                              CommandName="EmpEdit" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "id") %>' >
-                        <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                        <i class="glyphicon glyphicon-edit" aria-hidden="true" OnClick="btnupdt_Click" ></i>
                          </asp:LinkButton>
 
                          <asp:LinkButton ID="LinkButton1" runat="server" Text="Edit" CssClass="btn btn-primary" tooltip="Print" 

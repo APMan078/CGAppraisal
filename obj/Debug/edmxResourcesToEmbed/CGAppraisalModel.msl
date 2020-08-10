@@ -62,6 +62,9 @@
     <EntitySetMapping Name="TxnAppraisals">
       <EntityTypeMapping TypeName="CG_AppraisalModel.TxnAppraisal">
         <MappingFragment StoreEntitySet="TxnAppraisal">
+          <ScalarProperty Name="TotalProperty" ColumnName="TotalProperty" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="NotedBy" ColumnName="NotedBy" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
           <ScalarProperty Name="AccountName" ColumnName="AccountName" />
