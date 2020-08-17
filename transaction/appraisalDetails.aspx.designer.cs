@@ -148,13 +148,13 @@ namespace SampleApp.transaction {
         protected global::System.Web.UI.WebControls.Button btnAddRowItems;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// cbAppraisalItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList cbAppraisalItem;
         
         /// <summary>
         /// grdItems control.
@@ -175,6 +175,15 @@ namespace SampleApp.transaction {
         protected global::System.Web.UI.WebControls.Button btnAddRow;
         
         /// <summary>
+        /// chkWithVat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkWithVat;
+        
+        /// <summary>
         /// grdPaymentDetails control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace SampleApp.transaction {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdPaymentDetails;
+        
+        /// <summary>
+        /// lblWithVat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWithVat;
         
         /// <summary>
         /// btnNext control.

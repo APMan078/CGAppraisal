@@ -106,14 +106,12 @@
 
             <hr />
             <h3>Items</h3>
-
-
             <div class="container">
                 <div class="col-md-2">
                     <asp:Button ID="btnAddRowItems" runat="server" Text="Add Item" CssClass="btn btn-primary" OnClick="btnAddRowItems_Click" />
                 </div>
                 <div class="col-md-7">
-                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="cbAppraisalItem" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
             </div>
             <br />
@@ -136,17 +134,22 @@
                     </Columns>
                 </asp:GridView>
             </div>
-
-
-
-
             <hr />
-            <h3>PaymentDetails</h3>
+            <h3>Payment Details</h3>
             <div class="container">
-                <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Payment Details" CssClass="btn btn-primary" />
+                <div class="col-md-2">
+                    <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Payment Details" CssClass="btn btn-primary" />
+                </div>
+                <div class="col-md-5">
+                    <asp:CheckBox ID="chkWithVat" runat="server" CssClass="form-check-input" AutoPostBack="True" OnCheckedChanged="chkWithVat_CheckedChanged" />
+                    <label class="form-check-label" for="chkWithVat">With Vat</label>
+                </div>
+            </div>
+            <br />
+            <div class="container">
+
                 <asp:GridView ID="grdPaymentDetails" runat="server" DataKeyNames="RowNo" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDeleting="grdPaymentDetails_RowDeleting">
                     <Columns>
-
                         <asp:TemplateField HeaderStyle-HorizontalAlign="Left" HeaderText="#">
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNo" runat="server" Text='<%# Eval("RowNo") %>'></asp:Label>
@@ -165,10 +168,16 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowDeleteButton="True" />
-
                     </Columns>
                 </asp:GridView>
-
+                <div class="container">
+                    <div class="col-md-9">
+                        
+                    </div>
+                    <div class="col-md-3"> 
+                        <asp:Label ID="lblWithVat" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
 
             </div>
             <br />

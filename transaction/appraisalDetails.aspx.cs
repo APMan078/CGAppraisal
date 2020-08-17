@@ -93,7 +93,35 @@ namespace SampleApp.transaction
                                 ddPreparedBy.Text = db.SetUsers.Where(z=>z.Id == item.ApprovedBy).Select(x => x.LastName + ", " + x.FirstName).FirstOrDefault();
                             }
                         }
-                    }               
+                    }
+
+
+
+                    var dtCbItems = new DataTable();
+                    dtCbItems.Columns.Clear();
+                    dtCbItems.Columns.Add("item", typeof(string));
+                    dtCbItems.Rows.Clear();
+
+                    cbAppraisalItem.Items.Clear();
+
+                    using (CG_AppraisalEntities db = new CG_AppraisalEntities())
+                    {
+                        var _item = db.TxnAppraisalItems.Select(x => x.ItemDescription).Distinct().OrderBy(z => z).ToList();
+                        foreach (var x in _item)
+                        {
+                            cbAppraisalItem.Items.Add(x);
+                        }
+                    }
+
+                    if (dtCbItems.Rows.Count > 0)
+                    {
+                        ViewState["dtCbItems"] = dtCbItems;
+                    }
+                    else
+                    {
+                        ViewState["dtCbItems"] = null;
+                    }
+                    
                 }
                 else
                 {
@@ -182,13 +210,17 @@ namespace SampleApp.transaction
             TxnAppraisal txnAppraisal = new TxnAppraisal();
             txnAppraisal.AccountName = txtAccountName.Text;
             txnAppraisal.BatchCode = txtBatchReference.Text;
+            txnAppraisal.CompanyName = txtCompanyName.Text;
+            txnAppraisal.Address = txtPropertyLocation.Text;
+            txnAppraisal.CTCNo = txtTCTNo.Text; 
+
             PublicVariables.pubTxnAppraisal.Add(txnAppraisal);
             
  
 
            foreach(GridViewRow items in grdItems.Rows)
             {
-                TextBox x = (TextBox)items.Cells[1].FindControl("txtItem");
+                 
 
 
             }
@@ -476,6 +508,17 @@ namespace SampleApp.transaction
             //SetPreviousData();
         }
 
+        protected void chkWithVat_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkWithVat.Checked)
+            {
+                lblWithVat.Text = "With Vat 12%";
+            }
+            else
+            {
+                lblWithVat.Text = "";
+            }
+        }
     }
 }
 
