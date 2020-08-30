@@ -44,7 +44,7 @@
     <hr />
     <div class="container"> 
         <div class="form-group">  
-            <asp:Button ID="btnNext" runat="server" Text="Next" CssClass="btn btn-success" OnClientClick="return confirm('Are you sure you want to save this record?');"   />
+            <asp:Button ID="btnNext" runat="server" Text="Next" CssClass="btn btn-success" OnClientClick="return confirm('Are you sure you want to save this record?');" OnClick="btnNext_Click"   />
             <asp:Button ID="btnBackToList" runat="server" Text="Back to List" CssClass="btn btn-danger" OnClick="btnBackToList_Click"/>  
         </div>
     </div> 

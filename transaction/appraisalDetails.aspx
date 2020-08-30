@@ -138,7 +138,14 @@
             <h3>Payment Details</h3>
             <div class="container">
                 <div class="col-md-2">
+
+
                     <asp:Button ID="btnAddRow" runat="server" OnClick="btnAddRow_Click" Text="Add Payment Details" CssClass="btn btn-primary" />
+                    <ajaxToolkit:ComboBox ID="cbPaymentDetails" ItemInsertLocation="OrdinalValue" AutoPostBack="False" DropDownStyle="Simple" runat="server" Width="700" CssClass="WindowsStyle"
+                        AppendDataBoundItems="True" AutoCompleteMode="SuggestAppend">
+                    </ajaxToolkit:ComboBox>
+
+
                 </div>
                 <div class="col-md-5">
                     <asp:CheckBox ID="chkWithVat" runat="server" CssClass="form-check-input" AutoPostBack="True" OnCheckedChanged="chkWithVat_CheckedChanged" />
@@ -172,9 +179,8 @@
                 </asp:GridView>
                 <div class="container">
                     <div class="col-md-9">
-                        
                     </div>
-                    <div class="col-md-3"> 
+                    <div class="col-md-3">
                         <asp:Label ID="lblWithVat" runat="server" Text=""></asp:Label>
                     </div>
                 </div>

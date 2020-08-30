@@ -166,6 +166,15 @@ namespace SampleApp.transaction {
         protected global::System.Web.UI.WebControls.GridView grdItems;
         
         /// <summary>
+        /// cbPaymentDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ComboBox cbPaymentDetails;
+        
+        /// <summary>
         /// btnAddRow control.
         /// </summary>
         /// <remarks>

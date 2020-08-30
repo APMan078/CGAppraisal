@@ -181,5 +181,10 @@ namespace SampleApp.transaction
         {
             Response.Redirect("~/transaction/appraisalDetails");
         }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

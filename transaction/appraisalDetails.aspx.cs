@@ -33,15 +33,6 @@ namespace SampleApp.transaction
             {
                 //DataTable dt = GetTableWithNoData(); // get select column header only records not required
 
-                grdItems.DataSource = GetTableItem();
-                grdItems.DataBind();
-
-                grdPaymentDetails.DataSource = GetTablePaymentDetails(); // get first initial data
-                grdPaymentDetails.DataBind();
-
-                ddNotedBy.Items.Clear();
-                ddPreparedBy.Items.Clear();
-                
 
 
                 if (!string.IsNullOrEmpty(Request.QueryString["id"]) && Request.QueryString["id"] != "0")
@@ -121,7 +112,16 @@ namespace SampleApp.transaction
                     {
                         ViewState["dtCbItems"] = null;
                     }
-                    
+
+                    grdItems.DataSource = GetTableItem();
+                    grdItems.DataBind();
+
+                    grdPaymentDetails.DataSource = GetTablePaymentDetails(); // get first initial data
+                    grdPaymentDetails.DataBind();
+
+                    ddNotedBy.Items.Clear();
+                    ddPreparedBy.Items.Clear();
+
                 }
                 else
                 {
@@ -184,7 +184,8 @@ namespace SampleApp.transaction
                 return;
             }
 
-            if (txtBatchReference.Text != "") {
+            if (txtBatchReference.Text != "")
+            {
                 using (CG_AppraisalEntities db = new CG_AppraisalEntities())
                 {
                     var checkIfBatchIsExist = db.TxnAppraisals.Where(x => x.BatchCode == txtBatchReference.Text).ToList();
@@ -207,23 +208,65 @@ namespace SampleApp.transaction
 
             ViewState["doneDetails1"] = true;
 
-            TxnAppraisal txnAppraisal = new TxnAppraisal();
-            txnAppraisal.AccountName = txtAccountName.Text;
-            txnAppraisal.BatchCode = txtBatchReference.Text;
-            txnAppraisal.CompanyName = txtCompanyName.Text;
-            txnAppraisal.Address = txtPropertyLocation.Text;
-            txnAppraisal.CTCNo = txtTCTNo.Text; 
-
-            PublicVariables.pubTxnAppraisal.Add(txnAppraisal);
-            
- 
-
-           foreach(GridViewRow items in grdItems.Rows)
+            if (isEdit)
             {
-                 
-
-
+                using (CG_AppraisalEntities context = new CG_AppraisalEntities())
+                {
+                    //context.TxnAppraisals.Update(DivideByZeroException=)
+                }
             }
+            else
+            {
+                using (CG_AppraisalEntities context = new CG_AppraisalEntities())
+                {
+                    var item = context.TxnAppraisals.Add(new TxnAppraisal()
+                    {
+                        AccountName = txtAccountName.Text,
+                        BatchCode = txtBatchReference.Text,
+                        CompanyName = txtCompanyName.Text,
+                        Address = txtPropertyLocation.Text,
+                        CTCNo = txtTCTNo.Text
+                    });
+                    context.TxnAppraisals.Add(item);
+                    context.SaveChanges();
+
+                    for (int i = 0; i < grdItems.Rows.Count; i++)
+                    {
+                        Label lblRowNoItem = (Label)grdItems.Rows[i].Cells[0].FindControl("lblRowNoItem");
+                        TextBox txtItem = (TextBox)grdItems.Rows[i].Cells[1].FindControl("txtItem");
+
+                        var itemAppraisalItems = context.TxnAppraisalItems.Add(new TxnAppraisalItem()
+                        {
+                            TnxAppraisalId = item.Id,
+                            RowNo = Convert.ToInt32(lblRowNoItem.Text),
+                            ItemDescription = txtItem.Text,
+                        });
+                        context.TxnAppraisalItems.Add(itemAppraisalItems);
+                        context.SaveChanges();
+                    }
+
+                    for (int i = 0; i < grdPaymentDetails.Rows.Count; i++)
+                    {
+                        Label lblRowNo = (Label)grdPaymentDetails.Rows[i].Cells[0].FindControl("lblRowNo");
+                        TextBox txtPaymentDetails = (TextBox)grdPaymentDetails.Rows[i].Cells[1].FindControl("txtPaymentDetails");
+                        TextBox txtAmount = (TextBox)grdPaymentDetails.Rows[i].Cells[2].FindControl("txtAmount");
+
+                        var itemAppraisalPaymentDetails = context.TxnAppraisalPaymentDetails.Add(new TxnAppraisalPaymentDetail()
+                        {
+                            TxnAppraisalId = item.Id,
+                            PaymentDetails = txtPaymentDetails.Text,
+                            RowNo = Convert.ToInt32(lblRowNo.Text),
+                            Amount = Convert.ToDecimal(txtAmount.Text ?? "0")
+
+                        });
+                        context.TxnAppraisalPaymentDetails.Add(itemAppraisalPaymentDetails);
+                        context.SaveChanges();
+                    }
+                    
+                }
+            }
+
+            Response.Redirect("~/transaction/appraisal");
         }
 
         protected void btnBackToList_Click(object sender, EventArgs e)
@@ -243,7 +286,7 @@ namespace SampleApp.transaction
 
             dr = dt.NewRow();
             dr["RowNo"] = 1;
-            dr["PaymentDetails"] = string.Empty;
+            dr["PaymentDetails"] = cbPaymentDetails.Text;//string.Empty;
             dr["Amount"] = string.Empty;
             dt.Rows.Add(dr);
 
@@ -261,7 +304,7 @@ namespace SampleApp.transaction
 
             dr = dt.NewRow();
             dr["RowNo"] = 1;
-            dr["Item"] = string.Empty;
+            dr["Item"] = cbAppraisalItem.Text; //string.Empty;
             dt.Rows.Add(dr);
 
             ViewState["dtItems"] = dt;
@@ -287,6 +330,7 @@ namespace SampleApp.transaction
                         dt.Rows[i]["Amount"] = txtAmount.Text;
                     }
                     dr = dt.NewRow(); // add last empty row
+                    dr["PaymentDetails"] = cbPaymentDetails.Text;
                     dt.Rows.Add(dr);
                     ViewState["dtPaymentDetails"] = dt;
                     grdPaymentDetails.DataSource = dt; // bind new datatable to grid
@@ -416,6 +460,7 @@ namespace SampleApp.transaction
                         dt.Rows[i]["Item"] = txtItem.Text;
                     }
                     dr = dt.NewRow(); // add last empty row
+                    dr["Item"] = cbAppraisalItem.Text;
                     dt.Rows.Add(dr);
                     ViewState["dtItems"] = dt;
                     grdItems.DataSource = dt; // bind new datatable to grid
